@@ -20,13 +20,13 @@ link = request.LAN("lan")
  
 
 for k in range(0,3):
-    node = request.XenVM("node-" + str(k++))
-    iface = node.addInterface("if" + str(k++))
+    node = request.XenVM("node-" + str(k+=1))
+    iface = node.addInterface("if" + str(k+=1))
     
     node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"
 
     iface.component_id = "eth1"
-    iface.addAddress(pg.IPv4Address("192.168.1." + str(k++), "255.255.255.0"))
+    iface.addAddress(pg.IPv4Address("192.168.1." + str(k+=1), "255.255.255.0"))
 
     link.addInterface(iface)
 
