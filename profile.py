@@ -14,14 +14,14 @@ pc = portal.Context()
 
 # Create a Request object to start building the RSpec.
 request = pc.makeRequestRSpec()
-
+link = request.LAN("lan")
 for k in range(-1,3):
     node = request.XenVM(str("Node-") + str(k+1))
     iface = node.addInterface("if" + str(k+1))
     node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"
     iface.component_id = "eth1"
     iface.addAddress(pg.IPv4Address("192.168.1."+str(k+1),"255.255.255.0"))
-    link = request.LAN("lan")
+    
     link.addInterface(iface)
     if (k == 0):
        node.routable_control_ip ="true"
