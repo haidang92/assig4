@@ -20,7 +20,7 @@ link = request.LAN("lan")
  
 
 for k in range(0,3):
-    node = request.XenVM("node-" + str(k+=1))
+    node = request.XenVM("Node-" + str(k+=1))
     iface = node.addInterface("if" + str(k+=1))
     
     node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"
@@ -30,11 +30,9 @@ for k in range(0,3):
 
     link.addInterface(iface)
 
-    if(i == 0):
-        # Set public IP address
-        node.routable_control_ip = "true"
-        # Install and execute a script that is contained in the repository.
-        node.addService(pg.Execute(shell="sh", command="/local/repository/silly.sh"))
+    if(k == 0):
+    node.routable_control_ip = "true"
+    node.addService(pg.Execute(shell="sh", command="/local/repository/silly.sh"))
 
 # Print the RSpec to the enclosing page.
 pc.printRequestRSpec(request)
