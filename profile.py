@@ -34,7 +34,7 @@ for k in range(-1,3):
     node.addService(pg.Execute(shell="sh", command="/local/repository/silly.sh"))
 
 # Print the RSpec to the enclosing page.
-portal.printRequestRSpec(request)
+pc.printRequestRSpec(request)
 
 
 
