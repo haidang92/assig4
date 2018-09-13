@@ -5,7 +5,7 @@ This particular profile is a simple example of using a single raw PC. It can be 
 Instructions:
 Wait for the profile instance to start, then click on the node in the topology and choose the `shell` menu item. 
 """
-Import the Portal object.
+#Import the Portal object.
 import geni.portal as portal
 # Import the ProtoGENI library.
 import geni.rspec.pg as pg
