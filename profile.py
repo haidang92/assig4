@@ -19,7 +19,7 @@ request = pc.makeRequestRSpec()
 link = request.LAN("lan")
  
 
-for k in range(4):
+for k in range(-1,3):
     node = request.XenVM(str("node-") + str(k+1))
     iface = node.addInterface("if" + str(k+1))
     
@@ -30,8 +30,8 @@ for k in range(4):
     iface.addAddress(pg.IPv4Address("192.168.1." + str(k+1), "255.255.255.0"))
 
     link.addInterface(iface)
-    if(k == 0):
-    node.routable_control_ip = "true"
+    #if(k == 0):
+   # node.routable_control_ip = "true"
     
     node.addService(pg.Execute(shell="sh", command="/local/repository/silly.sh"))
 
