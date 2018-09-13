@@ -8,7 +8,7 @@ Wait for the profile instance to start, then click on the node in the topology a
 #Import the Portal object.
 import geni.portal as portal
 # Import the ProtoGENI library.
-import geni.rspec.pg as pg
+import geni.rspec.pg as rspec
 
 # Create a portal context.
 pc = portal.Context()
@@ -16,7 +16,7 @@ pc = portal.Context()
 # Create a Request object to start building the RSpec.
 request = pc.makeRequestRSpec()
 
-link = request.LAN("lan")
+
  
 
 for k in range(-1,3):
@@ -28,15 +28,16 @@ for k in range(-1,3):
 
     iface.component_id = "eth1"
     iface.addAddress(pg.IPv4Address("192.168.1." + str(k+1), "255.255.255.0"))
-
+    link = request.LAN("lan")
     link.addInterface(iface)
-    if(k == 0):
-   node.routable_control_ip = "true"
+    
+    if (k == 0):
+    node.routable_control_ip
     
     node.addService(pg.Execute(shell="sh", command="/local/repository/silly.sh"))
 
 # Print the RSpec to the enclosing page.
-pc.printRequestRSpec(request)
+portal.printRequestRSpec(request)
 
 
 
