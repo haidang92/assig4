@@ -5,8 +5,7 @@ This particular profile is a simple example of using a single raw PC. It can be 
 Instructions:
 Wait for the profile instance to start, then click on the node in the topology and choose the `shell` menu item. 
 """
-
-# Import the Portal object.
+Import the Portal object.
 import geni.portal as portal
 # Import the ProtoGENI library.
 import geni.rspec.pg as pg
@@ -16,12 +15,29 @@ pc = portal.Context()
 
 # Create a Request object to start building the RSpec.
 request = pc.makeRequestRSpec()
- 
-# Add a raw PC to the request.
-node = request.RawPC("node")
 
-# Install and execute a script that is contained in the repository.
-node.addService(pg.Execute(shell="sh", command="/local/repository/silly.sh"))
+link = request.LAN("lan")
+ 
+
+for k in range(0,3):
+    node = request.XenVM("node-" + str(k++))
+    iface = node.addInterface("if" + str(k++))
+    
+    node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"
+
+    iface.component_id = "eth1"
+    iface.addAddress(pg.IPv4Address("192.168.1." + str(k++), "255.255.255.0"))
+
+    link.addInterface(iface)
+
+    if(i == 0):
+        # Set public IP address
+        node.routable_control_ip = "true"
+        # Install and execute a script that is contained in the repository.
+        node.addService(pg.Execute(shell="sh", command="/local/repository/silly.sh"))
 
 # Print the RSpec to the enclosing page.
 pc.printRequestRSpec(request)
+
+
+
