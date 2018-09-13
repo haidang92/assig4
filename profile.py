@@ -22,6 +22,8 @@ link = request.LAN("lan")
 for k in range(0,3):
     node = request.XenVM("Node-" + str(k+=1))
     iface = node.addInterface("if" + str(k+=1))
+    if(k == 0):
+    node.routable_control_ip = "true"
     
     node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"
 
@@ -30,8 +32,7 @@ for k in range(0,3):
 
     link.addInterface(iface)
 
-    if(k == 0):
-    node.routable_control_ip = "true"
+    
     node.addService(pg.Execute(shell="sh", command="/local/repository/silly.sh"))
 
 # Print the RSpec to the enclosing page.
