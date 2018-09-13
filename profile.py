@@ -20,7 +20,7 @@ link = request.LAN("lan")
  
 
 for k in range(0,3):
-    node = request.XenVM("Node-" + str(k+=1))
+    node = request.XenVM("node-" + str(k+=1))
     iface = node.addInterface("if" + str(k+=1))
     if(k == 0):
     node.routable_control_ip = "true"
