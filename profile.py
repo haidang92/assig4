@@ -19,7 +19,7 @@ request = pc.makeRequestRSpec()
 link = request.LAN("lan")
  
 
-for k in range(-1,3):
+for k in range(4):
     node = request.XenVM("node-" + str(k+1))
     iface = node.addInterface("if" + str(k+1))
     
